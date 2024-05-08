@@ -6,6 +6,13 @@ const getAllProducts = async () => {
 	return query;
 }
 
+const getProductsByNameContains = async (nomeProduto) => {
+	console.log(nomeProduto);
+	const [query] = await connection.execute('SELECT * FROM produtos WHERE produto LIKE ?', ['%' + nomeProduto + '%']);
+
+	return query;
+}
+
 const createProduct = async (produto, valor) => {
 	const [query] = await connection.execute('INSERT INTO produtos (produto, valor) VALUES (?, ?)', [produto, valor]);
 
@@ -24,4 +31,4 @@ const deleteProduct = async (id) => {
 	return query;
 }
 
-module.exports = { getAllProducts, createProduct, updateProduct, deleteProduct };
+module.exports = { getAllProducts, createProduct, updateProduct, deleteProduct, getProductsByNameContains };

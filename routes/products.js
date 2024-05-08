@@ -10,7 +10,13 @@ router.get('/', async (req, res) => {
 	return res.status(200).json(query);
 })
 
-router.post('/', async (req, res) => {
+router.get('/name/:nomeProduto', async (req, res) => {
+	const query = await queries.getProductsByNameContains(req.params.nomeProduto);
+
+	return res.status(200).json(query);
+})
+
+router.post('/', async (req, res) => { 
 	const { produto, valor } = req.body;
 
 	const query = await queries.createProduct(produto, valor);
